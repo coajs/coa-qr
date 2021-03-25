@@ -19,21 +19,21 @@ export default new class {
 
     mkdirSync(dirname(dist), { recursive: true })
 
-    await qrCode.toFile(dist, text, this.convertQrCodeOption(option))
+    await qrCode.toFile(dist, text, this.originOption(option))
   }
 
   //生成一个二维码并返回Buffer
   async toBuffer (text: string, option: QrOption) {
 
-    const dataUrl = await qrCode.toDataURL(text, this.convertQrCodeOption(option))
+    const dataUrl = await qrCode.toDataURL(text, this.originOption(option))
 
     const base64 = dataUrl.substr(dataUrl.indexOf(',') + 1)
 
     return Buffer.from(base64, 'base64')
   }
 
-  // 转换为qrCode的配置
-  private convertQrCodeOption (option: QrOption) {
+  // 转换为qrCode的原始配置
+  public originOption (option: QrOption) {
     const { width, margin, color, background, level } = Object.assign({}, this.option, option)
     return { width, margin, errorCorrectionLevel: level, color: { dark: color, light: background } }
   }
