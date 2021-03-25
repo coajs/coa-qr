@@ -1,3 +1,4 @@
-import qr from './qr'
+import { CoaQr } from './CoaQr'
 
-export { qr }
+export { CoaQr }
+export const qr = new CoaQr()
