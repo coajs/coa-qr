@@ -1,14 +1,13 @@
 import * as qrCode from 'qrcode'
 
-export default new class {
-
-  async test () {
-
+export default new (class {
+  async test() {
     const url = 'HTTP://1MAK.CN/SZ/177/16/AQNGUJK2T25Q'
     const qr = this.getQrCodeInfo(url)
     console.log(`length:${qr.textLength} size:${qr.codeSize} version:${qr.codeVersion} mode:${qr.codeMode}`)
 
-    let lastVersion = 0, text = url + url + url + url
+    let lastVersion = 0
+    const text = url + url + url + url
     // const text = '1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
     // const text = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -19,11 +18,9 @@ export default new class {
       }
       lastVersion = qr.codeVersion
     }
-
   }
 
-  getQrCodeInfo (text: string) {
-
+  getQrCodeInfo(text: string) {
     const qr = qrCode.create(text, { errorCorrectionLevel: 'Q' })
     const codeSize = qr.modules.size
     const codeVersion = qr.version
@@ -31,6 +28,5 @@ export default new class {
     const textLength = text.length
 
     return { text, textLength, codeSize, codeVersion, codeMode }
-
   }
-}
+})()
